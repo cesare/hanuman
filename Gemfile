@@ -16,6 +16,7 @@ group :doc do
 end
 
 group :development do
+  gem 'rubocop'
   gem 'spring'
 end
 
