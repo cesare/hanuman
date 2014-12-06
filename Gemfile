@@ -29,3 +29,7 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
 end
+
+group :test do
+  gem 'capybara'
+end
