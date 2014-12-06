@@ -35,7 +35,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'given non-existing person_id' do
-      let(:user) { build :user, person_id: 987654 }
+      let(:user) { build :user, person_id: 987_654 }
 
       it { expect(user).to have_at_least(1).errors_on :person }
     end
