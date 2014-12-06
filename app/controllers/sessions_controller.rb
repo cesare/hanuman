@@ -3,12 +3,12 @@ class SessionsController < ApplicationController
     user = SigninService.signin auth_info
     session[:person_id] = user.person_id
 
-    redirect_to '/'
+    redirect_to root_path
   end
 
   def destroy
     reset_session
-    redirect_to '/'
+    redirect_to root_path
   end
 
   private
