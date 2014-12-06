@@ -4,6 +4,7 @@ AllCops:
     - 'bin/rails'
     - 'bin/rake'
     - 'bin/spring'
+    - 'db/schema.rb'
 
 Style/Documentation:
   Enabled: false
