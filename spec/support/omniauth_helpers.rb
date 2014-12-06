@@ -1,5 +1,5 @@
 module OmniauthHelpers
-  def setup_omniauth(provider:, uid: , name:)
+  def setup_omniauth(provider:, uid:, name:)
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[provider.to_sym] = OmniAuth::AuthHash.new(
       provider: provider.to_s,
