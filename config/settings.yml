@@ -1,0 +1,4 @@
+providers:
+  github:
+    key: 'YOUR-GITHUB-KEY'
+    secret: 'YOUR-GITHUB-SECRET'
