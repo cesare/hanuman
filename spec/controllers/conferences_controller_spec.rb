@@ -25,4 +25,12 @@ RSpec.describe ConferencesController, type: :controller do
       expect(assigns(:conference)).to eq conference
     end
   end
+
+  describe 'GET #show for non-existing conference' do
+    specify do
+      get :show, id: 999
+
+      expect(response).to be_not_found
+    end
+  end
 end
