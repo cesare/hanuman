@@ -1,0 +1,7 @@
+%h1= @conference.name
+
+.description
+  = simple_format @conference.description
+
+.back_to_index
+  = link_to 'Index', conferences_path

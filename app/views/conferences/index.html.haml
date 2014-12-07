@@ -1,0 +1,5 @@
+%h1 Conferences
+
+%ul
+  - @conferences.each do |conference|
+    %li= link_to conference.name, conference_path(conference)
