@@ -1,0 +1,11 @@
+%h1 New Proposal
+
+= form_for [@conference, @proposal] do |f|
+  .field.title
+    = f.label :title
+    = f.text_field :title
+  .field.summary
+    = f.label :summary
+    = f.text_area :summary
+  .actions
+    = f.submit 'Send'

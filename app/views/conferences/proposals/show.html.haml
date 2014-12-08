@@ -1,0 +1,7 @@
+%h1= @proposal.title
+
+.summary
+  = simple_format @proposal.summary
+
+.back_to_index
+  = link_to @conference.name, conference_path(@conference)
