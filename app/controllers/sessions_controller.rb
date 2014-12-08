@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  def new
+  end
+
   def create
     user = SigninService.signin auth_info
     session[:person_id] = user.person_id
