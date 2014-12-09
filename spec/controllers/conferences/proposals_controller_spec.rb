@@ -79,4 +79,18 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
       end
     end
   end
+
+  context 'with another person signing in' do
+    before do
+      login_as create(:person)
+    end
+
+    describe 'GET #show' do
+      specify do
+        get :show, conference_id: conference.id, id: proposal.id
+
+        expect(response).to have_http_status :not_found
+      end
+    end
+  end
 end
