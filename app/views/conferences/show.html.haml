@@ -3,5 +3,12 @@
 .description
   = simple_format @conference.description
 
+.staffs
+  %h2 Staff
+  %ul
+    - @conference.staffs.includes(:person).each do |staff|
+      %li
+        = staff.person.name
+
 .back_to_index
   = link_to 'Index', conferences_path
