@@ -4,4 +4,6 @@ class Person < ActiveRecord::Base
   has_many :staffs
 
   validates :name, presence: true
+
+  scope :admin, -> { where admin: true }
 end
