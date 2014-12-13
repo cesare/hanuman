@@ -19,5 +19,11 @@ RSpec.describe Conference, type: :model do
 
       it { expect(conference).to have_at_least(1).errors_on :description }
     end
+
+    context 'when proposal_deadline is missing' do
+      let(:conference) { build :conference, proposal_deadline: nil }
+
+      it { expect(conference).to have_at_least(1).errors_on :proposal_deadline }
+    end
   end
 end

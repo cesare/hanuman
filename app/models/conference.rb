@@ -6,4 +6,5 @@ class Conference < ActiveRecord::Base
   validates :description, presence: true
   validates :begins_at, presence: true
   validates :ends_at, presence: true
+  validates :proposal_deadline, presence: true
 end
