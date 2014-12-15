@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Conferences::ProposalsController, type: :controller do
   let(:person) { create :person }
-  let(:conference) { create :conference }
+  let(:conference) { create :conference, :open_to_proposals }
   let(:proposal) { create :proposal, conference: conference, person: person }
 
   context 'without signing in' do
@@ -90,6 +90,31 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         get :show, conference_id: conference.id, id: proposal.id
 
         expect(response).to have_http_status :not_found
+      end
+    end
+  end
+
+  context 'when the conference is not open to proposals' do
+    let(:conference) { create :conference, :settled }
+
+    before do
+      login_as create(:person)
+    end
+
+    describe 'GET #new' do
+      specify do
+        get :new, conference_id: conference.id
+
+        expect(response).to redirect_to conference_path(conference)
+      end
+    end
+
+    describe 'POST #create' do
+      specify do
+        post :create, conference_id: conference.id, proposal: { title: 'test', summary: 'Test' }
+
+        expect(response).to redirect_to conference_path(conference)
+        expect(conference.proposals(true)).to be_empty
       end
     end
   end

@@ -10,5 +10,9 @@
       %li
         = staff.person.name
 
+- if @conference.open_to_proposals?
+  .proposal
+    = link_to 'Submit proposal', new_conference_proposal_path(@conference)
+
 .back_to_index
   = link_to 'Index', conferences_path

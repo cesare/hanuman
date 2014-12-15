@@ -2,6 +2,7 @@ module Conferences
   class ProposalsController < ApplicationController
     before_action :authenticate_person!
     before_action :load_conference
+    before_action :check_deadline, only: %i(new create)
 
     def show
       @proposal = @conference.proposals.find_by! person: current_person, id: params[:id]
@@ -29,6 +30,12 @@ module Conferences
 
     def proposal_registration_params
       params.require(:proposal).permit(:title, :summary).merge(person: current_person)
+    end
+
+    def check_deadline
+      return if @conference.open_to_proposals?
+
+      redirect_to conference_path(@conference)
     end
   end
 end
