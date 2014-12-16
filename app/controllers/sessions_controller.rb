@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = SigninService.signin auth_info
     session[:person_id] = user.person_id
 
-    redirect_to root_path
+    redirect_to origin_uri || root_path
   end
 
   def destroy
@@ -24,5 +24,12 @@ class SessionsController < ApplicationController
       uid: auth['uid'].to_s,
       name: auth['info']['name'],
     }
+  end
+
+  def origin_uri
+    uri = request.env['omniauth.origin']
+
+    return nil unless uri =~ /\A\//
+    uri
   end
 end
