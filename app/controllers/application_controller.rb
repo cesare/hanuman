@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_auth
+    session[:auth_origin_uri] = request.path
     redirect_to auth_path
   end
 end
