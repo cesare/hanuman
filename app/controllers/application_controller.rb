@@ -29,17 +29,21 @@ class ApplicationController < ActionController::Base
   def authenticate_person!
     return if current_person.present?
 
-    redirect_to auth_path
+    redirect_to_auth
   end
 
   def authenticate_admin!
     unless current_person.present?
-      redirect_to auth_path
+      redirect_to_auth
       return
     end
 
     return if current_person.admin?
 
     redirect_to root_path
+  end
+
+  def redirect_to_auth
+    redirect_to auth_path
   end
 end
