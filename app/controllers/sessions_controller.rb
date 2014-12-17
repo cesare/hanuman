@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    @auth_origin_url = session.delete(:auth_origin_uri)
+    @auth_origin_uri = session.delete(:auth_origin_uri)
   end
 
   def create
