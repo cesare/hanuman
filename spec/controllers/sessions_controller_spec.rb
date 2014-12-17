@@ -24,6 +24,63 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
+  describe 'GET #create' do
+    let(:person) { create :person }
+    let(:user) { create :user, :github, person: person }
+
+    before do
+      request.env['omniauth.auth'] = {
+        'provider' => 'github',
+        'uid' => user.uid,
+        'info' => {
+          'name' => 'Test User'
+        }
+      }
+
+      expected_auth_info = {
+        provider: 'github',
+        uid: user.uid,
+        name: 'Test User',
+      }
+      expect(SigninService).to receive(:signin).with(expected_auth_info).and_return user
+    end
+
+    context 'given no origin' do
+      specify do
+        get :create, provider: 'github'
+
+        expect(response).to redirect_to root_path
+        expect(session[:person_id]).to eq person.id
+      end
+    end
+
+    context 'given origin uri' do
+      before do
+        request.env['omniauth.origin'] = '/conferences/1'
+      end
+
+      specify do
+        get :create, provider: 'github'
+
+        expect(response).to redirect_to '/conferences/1'
+        expect(session[:person_id]).to eq person.id
+      end
+    end
+
+    context 'given invalid origin uri' do
+      before do
+        request.env['omniauth.origin'] = 'http://external.example.com/'
+      end
+
+      specify do
+        get :create, provider: 'github'
+
+        expect(response).to redirect_to root_path
+        expect(session[:person_id]).to eq person.id
+      end
+    end
+  end
+
   describe 'GET #destroy' do
     before do
       session[:person_id] = 123
