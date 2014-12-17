@@ -23,4 +23,17 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #destroy' do
+    before do
+      session[:person_id] = 123
+    end
+
+    specify do
+      get :destroy
+
+      expect(response).to redirect_to root_path
+      expect(session).to be_empty
+    end
+  end
 end
