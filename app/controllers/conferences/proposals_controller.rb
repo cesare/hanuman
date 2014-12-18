@@ -4,6 +4,10 @@ module Conferences
     before_action :load_conference
     before_action :check_deadline, only: %i(new create)
 
+    def index
+      @proposals = @conference.proposals
+    end
+
     def show
       @proposal = @conference.proposals.find_by! person: current_person, id: params[:id]
     end

@@ -1,0 +1,10 @@
+%h1 Proposals
+
+%ul.proposals
+  - @proposals.each do |proposal|
+    %li
+      = proposal.title
+      = proposal.person.name
+
+
+
