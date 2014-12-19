@@ -6,6 +6,14 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
   let(:proposal) { create :proposal, conference: conference, person: person }
 
   context 'without signing in' do
+    describe 'GET #index' do
+      specify do
+        get :index, conference_id: conference.id
+
+        expect(response).to redirect_to '/auth'
+      end
+    end
+
     describe 'GET #show' do
       specify do
         get :show, conference_id: conference.id, id: proposal.id
@@ -34,6 +42,27 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
   context 'with signing in' do
     before do
       login_as person
+    end
+
+    describe 'GET #index with a staff of the conference' do
+      let!(:staff) { create :staff, conference: conference, person: person }
+
+      specify do
+        get :index, conference_id: conference.id
+
+        expect(response).to be_success
+        expect(response).to render_template :index
+        expect(assigns(:conference)).to eq conference
+        expect(assigns(:staff)).to eq staff
+      end
+    end
+
+    describe 'GET #index with a non-staff person' do
+      specify do
+        get :index, conference_id: conference.id
+
+        expect(response).to be_not_found
+      end
     end
 
     describe 'GET #show' do

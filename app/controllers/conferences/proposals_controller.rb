@@ -2,6 +2,7 @@ module Conferences
   class ProposalsController < ApplicationController
     before_action :authenticate_person!
     before_action :load_conference
+    before_action :require_staff, only: %i(index)
     before_action :check_deadline, only: %i(new create)
 
     def index
@@ -40,6 +41,13 @@ module Conferences
       return if @conference.open_to_proposals?
 
       redirect_to conference_path(@conference)
+    end
+
+    def require_staff
+      @staff = current_person.staffs.find_by(conference: @conference)
+      return if @staff
+
+      render_not_found
     end
   end
 end
