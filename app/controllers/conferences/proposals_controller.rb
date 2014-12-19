@@ -6,7 +6,7 @@ module Conferences
     before_action :check_deadline, only: %i(new create)
 
     def index
-      @proposals = @conference.proposals
+      @proposals = @conference.proposals.with_person
     end
 
     def show

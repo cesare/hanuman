@@ -7,4 +7,6 @@ class Proposal < ActiveRecord::Base
   validates :person, presence: true
   validates :title, presence: true
   validates :summary, presence: true
+
+  scope :with_person, -> { includes :person }
 end
