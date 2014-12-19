@@ -10,7 +10,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
       specify do
         get :index, conference_id: conference.id
 
-        expect(response).to redirect_to '/auth'
+        expect(response).to redirect_to auth_path
       end
     end
 
@@ -18,7 +18,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
       specify do
         get :show, conference_id: conference.id, id: proposal.id
 
-        expect(response).to redirect_to '/auth'
+        expect(response).to redirect_to auth_path
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
       specify do
         get :new, conference_id: conference.id
 
-        expect(response).to redirect_to '/auth'
+        expect(response).to redirect_to auth_path
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
       specify do
         post :create, conference_id: conference.id
 
-        expect(response).to redirect_to '/auth'
+        expect(response).to redirect_to auth_path
       end
     end
   end
