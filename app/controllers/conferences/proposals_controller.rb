@@ -7,6 +7,7 @@ module Conferences
 
     def index
       @proposals = @conference.proposals.with_person
+      @votes_by_person = current_person.votes.where(proposal_id: @proposals.map(&:id))
     end
 
     def show

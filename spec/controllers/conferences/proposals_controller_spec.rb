@@ -46,7 +46,8 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
 
     describe 'GET #index with a staff of the conference' do
       let!(:staff) { create :staff, conference: conference, person: person }
-      let(:proposals) { create_list :proposal, 3, conference: conference, person: create(:person) }
+      let!(:proposals) { create_list :proposal, 3, conference: conference, person: create(:person) }
+      let!(:vote) { create :vote, person: person, proposal: proposals.first }
 
       specify do
         get :index, conference_id: conference.id
@@ -56,6 +57,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         expect(assigns(:conference)).to eq conference
         expect(assigns(:staff)).to eq staff
         expect(assigns(:proposals)).to match_array proposals
+        expect(assigns(:votes_by_person)).to match_array [vote]
       end
     end
 
