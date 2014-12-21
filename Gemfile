@@ -16,7 +16,7 @@ gem 'sass-rails'
 gem 'uglifier'
 
 group :doc do
-  gem 'sdoc', '~> 0.4.0'
+  gem 'sdoc'
 end
 
 group :development do
