@@ -13,7 +13,7 @@ gem 'pg'
 gem 'rails-i18n'
 gem 'rails_config'
 gem 'sass-rails'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
