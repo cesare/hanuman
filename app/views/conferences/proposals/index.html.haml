@@ -1,10 +1,8 @@
 %h1 Proposals
 
-%ul.proposals
+%table.proposals
   - @proposals.each do |proposal|
-    %li
-      = proposal.title
-      = proposal.person.name
-
-
-
+    %tr
+      %td= proposal.title
+      %td= proposal.person.name
+      %td= proposal.summary.truncate(50)
