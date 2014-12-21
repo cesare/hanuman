@@ -6,3 +6,6 @@
       %td= proposal.title
       %td= proposal.person.name
       %td= proposal.summary.truncate(50)
+      %td
+        - if @votes_by_person.find {|vote| vote.proposal_id == proposal.id }.present?
+          voted
