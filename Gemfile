@@ -12,7 +12,7 @@ gem 'omniauth-github'
 gem 'pg'
 gem 'rails-i18n'
 gem 'rails_config'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :doc do
