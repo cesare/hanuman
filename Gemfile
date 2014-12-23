@@ -25,10 +25,12 @@ group :development do
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
+  gem 'web-console'
 end
 
 group :test do
