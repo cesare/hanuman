@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   namespace :staff, module: 'staffs' do
-    resources :conferences, only: %i(show)
+    resources :conferences, only: %i(show edit update)
   end
 
   get '/auth', to: 'sessions#new'
