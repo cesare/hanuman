@@ -28,4 +28,16 @@ RSpec.describe Person, type: :model do
       it { expect(person).to be_admin }
     end
   end
+
+  describe '#running_conferences' do
+    let(:person) { create :person }
+    let!(:staff) { create :staff, person: person, conference: conference }
+    let!(:conference) { create :conference }
+    let!(:other_conference) { create :conference }
+
+    specify do
+      expect(person.running_conferences).to include conference
+      expect(person.running_conferences).not_to include other_conference
+    end
+  end
 end
