@@ -1,0 +1,13 @@
+%h1
+  Edit
+  = @conference.name
+
+= form_for @conference, url: staff_conference_path(@conference) do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit 'Update'
