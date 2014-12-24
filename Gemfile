@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 
 gem 'aasm'
+gem 'bootstrap-sass'
 gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jbuilder'
