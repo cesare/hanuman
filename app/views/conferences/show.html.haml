@@ -12,7 +12,7 @@
 
 - if @conference.open_to_proposals?
   .proposal
-    = link_to 'Submit proposal', new_conference_proposal_path(@conference)
+    = link_to 'Submit proposal', new_conference_proposal_path(@conference), class: 'btn btn-primary btn-lg btn-block'
 
 .back_to_index
   = link_to 'Index', conferences_path
