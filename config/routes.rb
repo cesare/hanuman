@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   resources :conferences, only: %i(index show) do
     scope module: 'conferences' do
-      resources :proposals, only: %i(index show new create)
+      resources :proposals, only: %i(show new create)
     end
   end
 
   namespace :staff, module: 'staffs' do
-    resources :conferences, only: %i(show edit update)
+    resources :conferences, only: %i(show edit update) do
+      resources :proposals, only: %i(index)
+    end
   end
 
   get '/auth', to: 'sessions#new'
