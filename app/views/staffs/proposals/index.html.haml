@@ -18,3 +18,4 @@
           - if @votes_by_person.find {|vote| vote.proposal_id == proposal.id }.present?
             voted
         %td
+          = link_to 'show', staff_conference_proposal_path(@conference, proposal)
