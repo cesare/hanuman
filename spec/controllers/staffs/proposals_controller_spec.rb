@@ -13,6 +13,14 @@ RSpec.describe Staffs::ProposalsController, type: :controller do
         expect(response).to redirect_to auth_path
       end
     end
+
+    describe 'GET #show' do
+      specify do
+        get :show, conference_id: conference.id, id: proposal.id
+
+        expect(response).to redirect_to auth_path
+      end
+    end
   end
 
   context 'with a non-staff person signing in' do
@@ -23,6 +31,14 @@ RSpec.describe Staffs::ProposalsController, type: :controller do
     describe 'GET #index with a non-staff person' do
       specify do
         get :index, conference_id: conference.id
+
+        expect(response).to be_not_found
+      end
+    end
+
+    describe 'GET #show with a non-staff person' do
+      specify do
+        get :show, conference_id: conference.id, id: proposal.id
 
         expect(response).to be_not_found
       end
@@ -48,6 +64,16 @@ RSpec.describe Staffs::ProposalsController, type: :controller do
         expect(assigns(:conference)).to eq conference
         expect(assigns(:proposals)).to match_array proposals
         expect(assigns(:votes_by_person)).to match_array [vote]
+      end
+    end
+
+    describe 'GET #show' do
+      specify do
+        get :show, conference_id: conference.id, id: proposal.id
+
+        expect(response).to be_success
+        expect(response).to render_template :show
+        expect(assigns(:proposal)).to eq proposal
       end
     end
   end

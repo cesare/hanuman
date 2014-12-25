@@ -8,6 +8,10 @@ module Staffs
       @votes_by_person = current_person.votes.where(proposal_id: @proposals.map(&:id))
     end
 
+    def show
+      @proposal = @conference.proposals.find params[:id]
+    end
+
     private
 
     def load_conference
