@@ -35,4 +35,6 @@ class Conference < ActiveRecord::Base
       transitions from: :deciding, to: :settled
     end
   end
+
+  scope :published, -> { where(published: true) }
 end
