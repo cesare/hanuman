@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe ConferencesController, type: :controller do
   describe 'GET #index' do
-    let!(:conference1) { create :conference }
-    let!(:conference2) { create :conference }
+    let!(:conference1) { create :conference, :published }
+    let!(:conference2) { create :conference, :published }
+    let!(:conference3) { create :conference, :unpublished }
 
     specify do
       get :index
@@ -15,14 +16,26 @@ RSpec.describe ConferencesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:conference) { create :conference }
+    context 'when the conference is published' do
+      let!(:conference) { create :conference, :published }
 
-    specify do
-      get :show, id: conference.id
+      specify do
+        get :show, id: conference.id
 
-      expect(response).to be_success
-      expect(response).to render_template :show
-      expect(assigns(:conference)).to eq conference
+        expect(response).to be_success
+        expect(response).to render_template :show
+        expect(assigns(:conference)).to eq conference
+      end
+    end
+
+    context 'when the conference is not published' do
+      let!(:conference) { create :conference, :unpublished }
+
+      specify do
+        get :show, id: conference.id
+
+        expect(response).to be_not_found
+      end
     end
   end
 

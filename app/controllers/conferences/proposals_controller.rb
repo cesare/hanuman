@@ -25,7 +25,7 @@ module Conferences
     private
 
     def load_conference
-      @conference = Conference.find(params[:conference_id])
+      @conference = Conference.published.find(params[:conference_id])
     end
 
     def proposal_registration_params

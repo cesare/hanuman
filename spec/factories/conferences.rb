@@ -15,15 +15,18 @@ FactoryGirl.define do
     end
 
     trait :open_to_proposals do
+      published
       state Conference.states['open_to_proposals']
     end
 
     trait :settled do
+      published
       state Conference.states['settled']
       proposal_deadline { 3.days.ago }
     end
 
     trait :past do
+      published
       begins_at { 10.days.ago.change(hour: 10) }
       ends_at   { 10.days.ago.change(hour: 18) }
       proposal_deadline { 15.days.ago.change(hour: 0) }

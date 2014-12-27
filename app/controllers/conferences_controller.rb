@@ -1,9 +1,9 @@
 class ConferencesController < ApplicationController
   def index
-    @conferences = Conference.all
+    @conferences = Conference.published.all
   end
 
   def show
-    @conference = Conference.find params[:id]
+    @conference = Conference.published.find params[:id]
   end
 end
