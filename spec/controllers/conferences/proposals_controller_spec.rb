@@ -78,6 +78,59 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         expect(response).to redirect_to conference_proposal_path(conference, new_proposal)
       end
     end
+
+    describe 'GET #edit' do
+      specify do
+        get :edit, conference_id: conference.id, id: proposal.id
+
+        expect(response).to be_success
+        expect(response).to render_template :edit
+        expect(assigns(:conference)).to eq conference
+        expect(assigns(:proposal)).to eq proposal
+      end
+    end
+
+    describe 'PUT #update with invalid parameters' do
+      let(:parameters) do
+        {
+          conference_id: conference.id,
+          id: proposal.id,
+          proposal: {
+            title: '',
+            summary: '',
+          }
+        }
+      end
+
+      specify do
+        put :update, parameters
+
+        expect(response).to have_http_status :unprocessable_entity
+        expect(response).to render_template :edit
+      end
+    end
+
+    describe 'PUT #update with valid parameters' do
+      let(:parameters) do
+        {
+          conference_id: conference.id,
+          id: proposal.id,
+          proposal: {
+            title: 'changed title',
+            summary: 'changed summary',
+          }
+        }
+      end
+
+      specify do
+        put :update, parameters
+
+        proposal.reload
+        expect(response).to redirect_to conference_proposal_path(conference, proposal)
+        expect(proposal.title).to eq 'changed title'
+        expect(proposal.summary).to eq 'changed summary'
+      end
+    end
   end
 
   context 'with another person signing in' do
@@ -88,6 +141,14 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
     describe 'GET #show' do
       specify do
         get :show, conference_id: conference.id, id: proposal.id
+
+        expect(response).to have_http_status :not_found
+      end
+    end
+
+    describe 'GET #edit' do
+      specify do
+        get :edit, conference_id: conference.id, id: proposal.id
 
         expect(response).to have_http_status :not_found
       end

@@ -13,7 +13,7 @@ module Conferences
     end
 
     def create
-      @proposal = @conference.proposals.build proposal_registration_params
+      @proposal = @conference.proposals.build proposal_params
       if @proposal.valid?
         @proposal.save!
         redirect_to conference_proposal_path(@conference, @proposal)
@@ -26,6 +26,11 @@ module Conferences
     end
 
     def update
+      if @proposal.update proposal_params
+        redirect_to conference_proposal_path(@conference, @proposal)
+      else
+        render action: :edit, status: :unprocessable_entity
+      end
     end
 
     private
@@ -34,7 +39,7 @@ module Conferences
       @conference = Conference.published.find(params[:conference_id])
     end
 
-    def proposal_registration_params
+    def proposal_params
       params.require(:proposal).permit(:title, :summary).merge(person: current_person)
     end
 
