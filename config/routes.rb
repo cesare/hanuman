@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :conferences, only: %i(index show) do
     scope module: 'conferences' do
-      resources :proposals, only: %i(show new create)
+      resources :proposals, only: %i(show new create edit update)
     end
   end
 

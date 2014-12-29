@@ -25,4 +25,22 @@ RSpec.describe 'routing to conferences/proposals', type: :routing do
       conference_id: '123',
     )
   end
+
+  specify do
+    expect(get: '/conferences/123/proposals/987/edit').to route_to(
+      controller: 'conferences/proposals',
+      action: 'edit',
+      conference_id: '123',
+      id: '987'
+    )
+  end
+
+  specify do
+    expect(put: '/conferences/123/proposals/987').to route_to(
+      controller: 'conferences/proposals',
+      action: 'update',
+      conference_id: '123',
+      id: '987'
+    )
+  end
 end
