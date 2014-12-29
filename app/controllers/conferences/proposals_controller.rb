@@ -2,10 +2,10 @@ module Conferences
   class ProposalsController < ApplicationController
     before_action :authenticate_person!
     before_action :load_conference
-    before_action :check_deadline, only: %i(new create)
+    before_action :check_deadline, only: %i(new create edit update)
+    before_action :load_proposal, only: %i(show edit update)
 
     def show
-      @proposal = @conference.proposals.find_by! person: current_person, id: params[:id]
     end
 
     def new
@@ -22,6 +22,12 @@ module Conferences
       end
     end
 
+    def edit
+    end
+
+    def update
+    end
+
     private
 
     def load_conference
@@ -36,6 +42,10 @@ module Conferences
       return if @conference.open_to_proposals?
 
       redirect_to conference_path(@conference)
+    end
+
+    def load_proposal
+      @proposal = @conference.proposals.find_by! person: current_person, id: params[:id]
     end
   end
 end
