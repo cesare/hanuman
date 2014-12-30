@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :staff, module: 'staffs' do
     resources :conferences, only: %i(show edit update) do
       resources :proposals, only: %i(index show)
+      resources :votes, only: %i(create destroy)
     end
   end
 
