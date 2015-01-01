@@ -15,7 +15,14 @@
         %td= proposal.person.name
         %td= proposal.summary.truncate(50)
         %td
-          - if @votes_by_person.find {|vote| vote.proposal_id == proposal.id }.present?
+          - if proposal.voted_by? current_person
             voted
         %td
           = link_to 'show', staff_conference_proposal_path(@conference, proposal)
+          - if proposal.voted_by? current_person
+            = form_for proposal.votes.by(current_person), url: staff_conference_vote_path(@conference, proposal), method: :delete, html: { class: 'visible-lg-inline' } do |f|
+              = f.submit 'unvote', class: 'btn btn-warning'
+          - else
+            = form_for proposal.votes.build, url: staff_conference_votes_path(@conference), html: { class: 'visible-lg-inline' } do |f|
+              = f.hidden_field :proposal_id
+              = f.submit 'vote', class: 'btn btn-primary'
