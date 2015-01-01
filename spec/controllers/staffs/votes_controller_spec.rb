@@ -56,7 +56,7 @@ RSpec.describe Staffs::VotesController, type: :controller do
       specify do
         post :create, conference_id: conference.id, vote: { proposal_id: proposal.id }
 
-        expect(response).to redirect_to staff_conference_path(conference)
+        expect(response).to redirect_to staff_conference_proposals_path(conference)
         expect(person.votes(true).find_by proposal: proposal).to be_present
       end
     end
@@ -69,7 +69,7 @@ RSpec.describe Staffs::VotesController, type: :controller do
       specify do
         delete :destroy, conference_id: conference.id, id: proposal.id
 
-        expect(response).to redirect_to staff_conference_path(conference)
+        expect(response).to redirect_to staff_conference_proposals_path(conference)
         expect(person.votes(true).find_by proposal: proposal).not_to be_present
       end
     end
