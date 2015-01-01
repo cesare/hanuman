@@ -63,7 +63,6 @@ RSpec.describe Staffs::ProposalsController, type: :controller do
         expect(response).to render_template :index
         expect(assigns(:conference)).to eq conference
         expect(assigns(:proposals)).to match_array proposals
-        expect(assigns(:votes_by_person)).to match_array [vote]
       end
     end
 

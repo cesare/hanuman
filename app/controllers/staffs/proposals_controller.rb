@@ -4,8 +4,7 @@ module Staffs
     before_action :load_conference
 
     def index
-      @proposals = @conference.proposals.with_person
-      @votes_by_person = current_person.votes.where(proposal_id: @proposals.map(&:id))
+      @proposals = @conference.proposals.with_person.with_votes
     end
 
     def show
