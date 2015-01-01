@@ -8,13 +8,13 @@ module Staffs
     def create
       current_person.votes.create vote_params
 
-      redirect_to staff_conference_path @conference
+      redirect_to staff_conference_proposals_path @conference
     end
 
     def destroy
       @vote.destroy
 
-      redirect_to staff_conference_path @conference
+      redirect_to staff_conference_proposals_path @conference
     end
 
     private
