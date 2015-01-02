@@ -3,5 +3,8 @@
 .summary
   = simple_format @proposal.summary
 
+.actions
+  = link_to 'Delete proposal', conference_proposal_path(@conference, @proposal), method: :delete, class: 'btn btn-danger'
+
 .back_to_index
   = link_to @conference.name, conference_path(@conference)
