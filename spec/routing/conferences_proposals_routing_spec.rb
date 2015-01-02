@@ -43,4 +43,13 @@ RSpec.describe 'routing to conferences/proposals', type: :routing do
       id: '987'
     )
   end
+
+  specify do
+    expect(delete: '/conferences/123/proposals/987').to route_to(
+      controller: 'conferences/proposals',
+      action: 'destroy',
+      conference_id: '123',
+      id: '987'
+    )
+  end
 end
