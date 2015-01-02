@@ -2,8 +2,8 @@ module Conferences
   class ProposalsController < ApplicationController
     before_action :authenticate_person!
     before_action :load_conference
-    before_action :check_deadline, only: %i(new create edit update)
-    before_action :load_proposal, only: %i(show edit update)
+    before_action :check_deadline, only: %i(new create edit update destroy)
+    before_action :load_proposal, only: %i(show edit update destroy)
 
     def show
     end
@@ -31,6 +31,11 @@ module Conferences
       else
         render action: :edit, status: :unprocessable_entity
       end
+    end
+
+    def destroy
+      @proposal.destroy
+      redirect_to conference_path @conference
     end
 
     private

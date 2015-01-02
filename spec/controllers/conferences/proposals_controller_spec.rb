@@ -29,6 +29,14 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         expect(response).to redirect_to auth_path
       end
     end
+
+    describe 'DELETE #destroy' do
+      specify do
+        delete :destroy, conference_id: conference.id, id: proposal.id
+
+        expect(response).to redirect_to auth_path
+      end
+    end
   end
 
   context 'with signing in' do
@@ -131,6 +139,15 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         expect(proposal.summary).to eq 'changed summary'
       end
     end
+
+    describe 'DELETE #destroy' do
+      specify do
+        delete :destroy, conference_id: conference.id, id: proposal.id
+
+        expect(response).to redirect_to conference_path conference
+        expect(Proposal.exists? proposal.id).to be false
+      end
+    end
   end
 
   context 'with another person signing in' do
@@ -151,6 +168,14 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         get :edit, conference_id: conference.id, id: proposal.id
 
         expect(response).to have_http_status :not_found
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      specify do
+        delete :destroy, conference_id: conference.id, id: proposal.id
+
+        expect(response).to be_not_found
       end
     end
   end
