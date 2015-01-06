@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217144626) do
+ActiveRecord::Schema.define(version: 20150106143858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "conferences", force: true do |t|
+  create_table "conferences", force: :cascade do |t|
     t.string   "name",                              null: false
     t.text     "description",                       null: false
     t.boolean  "published",         default: false, null: false
@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 20141217144626) do
     t.integer  "state",             default: 0,     null: false
   end
 
-  create_table "people", force: true do |t|
+  create_table "people", force: :cascade do |t|
     t.string   "name",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",      default: false, null: false
   end
 
-  create_table "proposals", force: true do |t|
+  create_table "proposals", force: :cascade do |t|
     t.integer  "conference_id", null: false
     t.integer  "person_id",     null: false
     t.string   "title",         null: false
@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 20141217144626) do
     t.datetime "updated_at"
   end
 
-  create_table "staffs", force: true do |t|
+  create_table "staffs", force: :cascade do |t|
     t.integer  "conference_id", null: false
     t.integer  "person_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.integer  "person_id",  null: false
     t.string   "name",       null: false
     t.string   "uid",        null: false
@@ -60,10 +60,9 @@ ActiveRecord::Schema.define(version: 20141217144626) do
     t.datetime "updated_at"
   end
 
-  create_table "votes", force: true do |t|
+  create_table "votes", force: :cascade do |t|
     t.integer  "proposal_id", null: false
     t.integer  "person_id",   null: false
-    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
