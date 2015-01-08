@@ -77,7 +77,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
 
     describe 'POST #create with valid paramters' do
       specify do
-        post :create, conference_id: conference.id, proposal: { title: 'test', summary: 'Test' }
+        post :create, conference_id: conference.id, proposal: { title: 'test', summary: 'Test', notes: 'test notes' }
 
         new_proposal = conference.proposals(true).last
         expect(new_proposal.person).to eq person
@@ -126,6 +126,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
           proposal: {
             title: 'changed title',
             summary: 'changed summary',
+            notes: 'notes also changed',
           }
         }
       end
@@ -137,6 +138,7 @@ RSpec.describe Conferences::ProposalsController, type: :controller do
         expect(response).to redirect_to conference_proposal_path(conference, proposal)
         expect(proposal.title).to eq 'changed title'
         expect(proposal.summary).to eq 'changed summary'
+        expect(proposal.notes).to eq 'notes also changed'
       end
     end
 

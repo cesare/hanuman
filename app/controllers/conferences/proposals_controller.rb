@@ -45,7 +45,7 @@ module Conferences
     end
 
     def proposal_params
-      params.require(:proposal).permit(:title, :summary).merge(person: current_person)
+      params.require(:proposal).permit(:title, :summary, :notes).merge(person: current_person)
     end
 
     def check_deadline
