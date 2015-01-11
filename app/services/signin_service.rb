@@ -1,16 +1,17 @@
 class SigninService
-  attr_reader :provider, :uid, :name
+  attr_reader :provider, :uid, :name, :email
 
   class << self
-    def signin(provider:, uid:, name:)
-      new(provider: provider, uid: uid, name: name).create
+    def signin(provider:, uid:, name:, email:)
+      new(provider: provider, uid: uid, name: name, email: email).create
     end
   end
 
-  def initialize(provider:, uid:, name:)
+  def initialize(provider:, uid:, name:, email:)
     @provider = provider
     @uid = uid
     @name = name
+    @email = email
   end
 
   def create
@@ -34,7 +35,7 @@ class SigninService
   end
 
   def create_user_and_person
-    person = Person.create!(name: name)
+    person = Person.create!(name: name, email: email)
     User.create!(provider: provider, uid: uid, name: name, person: person)
   end
 end

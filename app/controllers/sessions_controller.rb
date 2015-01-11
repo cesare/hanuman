@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
       provider: auth['provider'],
       uid: auth['uid'].to_s,
       name: auth['info']['name'],
+      email: auth['info']['email'],
     }
   end
 

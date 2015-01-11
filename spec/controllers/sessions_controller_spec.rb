@@ -33,7 +33,8 @@ RSpec.describe SessionsController, type: :controller do
         'provider' => 'github',
         'uid' => user.uid,
         'info' => {
-          'name' => 'Test User'
+          'name' => 'Test User',
+          'email' => 'test001@example.com',
         }
       }
 
@@ -41,6 +42,7 @@ RSpec.describe SessionsController, type: :controller do
         provider: 'github',
         uid: user.uid,
         name: 'Test User',
+        email: 'test001@example.com',
       }
       expect(SigninService).to receive(:signin).with(expected_auth_info).and_return user
     end
