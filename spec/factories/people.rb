@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :person do
     name 'Test Person'
-    sequence(:email) { |n| 'test%03d@example.com' % n }
+    sequence(:email) { |n| format 'test%03d@example.com', n }
     admin false
 
     trait :admin do
