@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
   has_many :running_conferences, through: :staffs, class_name: 'Conference', source: 'conference'
 
   validates :name, presence: true
+  validates :email, presence: true
 
   scope :admin, -> { where admin: true }
 end

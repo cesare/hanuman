@@ -13,6 +13,12 @@ RSpec.describe Person, type: :model do
 
       it { expect(person).to have_at_least(1).errors_on :name }
     end
+
+    context 'when email is missing' do
+      let(:person) { build :person, email: nil }
+
+      it { expect(person).to have_at_least(1).errors_on :email }
+    end
   end
 
   describe '#admin' do
