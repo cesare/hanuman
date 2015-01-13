@@ -1,4 +1,5 @@
 %h1 Sign in with:
 
 %ul
+  %li= link_to 'Facebook', auth_provider_path(provider: 'facebook', origin: @auth_origin_uri)
   %li= link_to 'GitHub', auth_provider_path(provider: 'github', origin: @auth_origin_uri)
