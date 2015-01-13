@@ -17,6 +17,11 @@ Create `config/settings/development.local.yml` like this:
 
 ```yaml
 providers:
+  # Register your application with https://developers.facebook.com/apps/
+  facebook:
+    key: YOUR_FACEBOOK_APP_ID
+    secret: YOUR_FACEBOOK_APP_SECRET
+
   # Register your application with https://github.com/settings/applications
   github:
     key: YOUR_GITHUB_CLIENT_ID

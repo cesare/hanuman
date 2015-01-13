@@ -1,4 +1,7 @@
 providers:
+  facebook:
+    key: 'YOUR-FACEBOOK-APP-ID'
+    secret: 'YOUR-FACEBOOK-APP-SECRET'
   github:
     key: 'YOUR-GITHUB-KEY'
     secret: 'YOUR-GITHUB-SECRET'
