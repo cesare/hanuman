@@ -43,6 +43,7 @@ RSpec.describe SessionsController, type: :controller do
         uid: user.uid,
         name: 'Test User',
         email: 'test001@example.com',
+        person: nil,
       }
       expect(SigninService).to receive(:signin).with(expected_auth_info).and_return user
     end

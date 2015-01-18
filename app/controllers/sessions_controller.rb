@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = SigninService.signin auth_info
+    user = SigninService.signin auth_info.merge(person: current_person)
     session[:person_id] = user.person_id
 
     redirect_to origin_uri || root_path
